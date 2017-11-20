@@ -25,6 +25,9 @@
 > `yq`是对`UIViewController`的扩展, 因此在`ViewController`中显示弹出框时,可直接使用`yq.makeAlert`方式
 
 #### 1. 基本用法
+
+<img src="https://github.com/YQqiang/UIViewControllerYQAlert/blob/master/Screen%20Shot/1.png" alt="基本用法" width="320">
+
 ```Swift
 yq.makeAlert { (make) in
     make.title = "标题"
