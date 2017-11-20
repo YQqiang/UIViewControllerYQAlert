@@ -20,8 +20,9 @@ class AlertMaker {
     
     var titleColor: UIColor = UIColor.black
     var descColor: UIColor = UIColor(colorHex: 0x363636)
-    var confirmTitleColor: UIColor? = UIColor(colorHex: 0xF47920)
-    var cancelTitleColor: UIColor? = UIColor(colorHex: 0xF47920)
+    
+    var confirmTitleColor: UIColor?
+    var cancelTitleColor: UIColor?
     
     var titleFont: UIFont = UIFont.systemFont(ofSize: 16)
     var descFont: UIFont = UIFont.systemFont(ofSize: 14)
@@ -101,7 +102,7 @@ class AlertMaker {
 }
 
 struct AlertManager {
-    let viewController: UIViewController
+    private let viewController: UIViewController
     init(viewController: UIViewController) {
         self.viewController = viewController
     }

@@ -51,7 +51,6 @@
 		2F8BC56A1FC2565100DD3366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F8BC5771FC2581000DD3366 /* UIViewControllerYQAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerYQAlert.swift; sourceTree = "<group>"; };
 		2F8BC57C1FC25DFA00DD3366 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2F8BC57E1FC25E1400DD3366 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		2F8BC57F1FC25E1400DD3366 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2F8BC5801FC25E1400DD3366 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -312,7 +311,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2F8BC54D1FC2565000DD3366 /* Base */,
-				2F8BC57E1FC25E1400DD3366 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
