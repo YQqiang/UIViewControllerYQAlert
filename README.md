@@ -125,7 +125,7 @@ yq.makeAlert { (make) in
 
 #### 8. 综合使用
 
-<img src="https://github.com/YQqiang/UIViewControllerYQAlert/blob/master/Screen%20Shot/8.png" alt="综合使用">
+<img src="https://github.com/YQqiang/UIViewControllerYQAlert/blob/master/Screen%20Shot/8.png" alt="综合使用" width="320">
 
 ```swift
 yq.makeAlert { (make) in
