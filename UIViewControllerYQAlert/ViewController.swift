@@ -91,6 +91,19 @@ extension ViewController {
         }).showSingleConfirm()
     }
     
+    /// 富文本描述文字
+    @IBAction func showAttributeDescAlert(_ sender: UIButton) {
+        yq.makeAlert { (make) in
+            make.title = "富文本"
+            let descAttri = NSMutableAttributedString()
+            descAttri.append(NSAttributedString(string: "使用富文本描述文字属性名称", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.darkGray]))
+            descAttri.append(NSAttributedString(string: "\"attributedDesc\"", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.red]))
+            descAttri.append(NSAttributedString(string: "设置描述文字", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.darkGray]))
+            make.attributedDesc = descAttri
+            
+        }.showSingleConfirm()
+    }
+    
     /// 综合使用
     @IBAction func showAlertComprehensive(_ sender: UIButton) {
         yq.makeAlert { (make) in

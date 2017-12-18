@@ -15,6 +15,7 @@ class AlertMaker {
     
     var title: String = ""
     var desc: String = ""
+    var attributedDesc: NSAttributedString?
     var confirmTitle: String = NSLocalizedString("CONFIRM", comment: "")
     var cancelTitle: String = NSLocalizedString("CANCEL", comment: "")
     
@@ -34,15 +35,17 @@ class AlertMaker {
     
     func show(isSingleConfirm: Bool = false) {
         var titleAttr = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
-        let descAttr = NSAttributedString(string: "\n" + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
-        
+        var descAttr = NSAttributedString(string: (desc.count > 0 ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
+        if let _ = attributedDesc {
+            descAttr = attributedDesc!
+        }
         let alertVC = UIAlertController(title: "", message: "", preferredStyle: .alert)
         if let titleImg = titleImage {
             if titleImageSize == CGSize.zero {
                 titleImageSize = titleImg.size
             }
             var count = Int(titleImageSize.height / titleImageHeight()) + 1
-            if title.characters.count > 0 {
+            if title.count > 0 {
                 count += 1
             }
             var enterStr = ""
