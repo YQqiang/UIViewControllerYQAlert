@@ -16,24 +16,24 @@ class AlertMaker {
     var title: String = ""
     var desc: String = ""
     var attributedDesc: NSAttributedString?
-    var confirmTitle: String = NSLocalizedString("CONFIRM", comment: "")
-    var cancelTitle: String = NSLocalizedString("CANCEL", comment: "")
+    var rightActionTitle: String = NSLocalizedString("CONFIRM", comment: "")
+    var leftActionTitle: String = NSLocalizedString("CANCEL", comment: "")
     
     var titleColor: UIColor = UIColor.black
     var descColor: UIColor = UIColor(colorHex: 0x363636)
     
-    var confirmTitleColor: UIColor?
-    var cancelTitleColor: UIColor?
+    var rightActionTitleColor: UIColor?
+    var leftActionTitleColor: UIColor?
     
     var titleFont: UIFont = UIFont.systemFont(ofSize: 16)
     var descFont: UIFont = UIFont.systemFont(ofSize: 14)
     
-    fileprivate var confirmClosure: ((_ action: UIAlertAction) -> Void)?
-    fileprivate var cancelClosure: ((_ action: UIAlertAction) -> Void)?
+    fileprivate var rightActionClosure: ((_ action: UIAlertAction) -> Void)?
+    fileprivate var leftActionClosure: ((_ action: UIAlertAction) -> Void)?
     
     fileprivate var viewController: UIViewController?
     
-    func show(isSingleConfirm: Bool = false) {
+    func show(isSingleRight: Bool = false) {
         var titleAttr = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
         var descAttr = NSAttributedString(string: (desc.count > 0 ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
         if let _ = attributedDesc {
@@ -65,37 +65,36 @@ class AlertMaker {
         alertVC.setValue(titleAttr, forKey: "attributedTitle")
         alertVC.setValue(descAttr, forKey: "attributedMessage")
         
-        let confirmAction = UIAlertAction(title: confirmTitle, style: .default) { (action) in
-            if let closure = self.confirmClosure {
+        let confirmAction = UIAlertAction(title: rightActionTitle, style: .default) { (action) in
+            if let closure = self.rightActionClosure {
                 closure(action)
             }
         }
-        confirmAction.setValue(confirmTitleColor, forKey: "titleTextColor")
-        alertVC.addAction(confirmAction)
-        
-        if !isSingleConfirm {
-            let cancelAction = UIAlertAction(title: cancelTitle, style: .default) { (action) in
-                if let closure = self.cancelClosure {
+        if !isSingleRight {
+            let cancelAction = UIAlertAction(title: leftActionTitle, style: .default) { (action) in
+                if let closure = self.leftActionClosure {
                     closure(action)
                 }
             }
-            cancelAction.setValue(cancelTitleColor, forKey: "titleTextColor")
+            cancelAction.setValue(leftActionTitleColor, forKey: "titleTextColor")
             alertVC.addAction(cancelAction)
         }
+        confirmAction.setValue(rightActionTitleColor, forKey: "titleTextColor")
+        alertVC.addAction(confirmAction)
         self.viewController?.present(alertVC, animated: true, completion: nil)
     }
     
-    func showSingleConfirm() {
-        show(isSingleConfirm: true)
+    func showSingleRight() {
+        show(isSingleRight: true)
     }
     
-    func confirmClosure(_ closure: @escaping (UIAlertAction) -> Void) -> AlertMaker {
-        confirmClosure = closure
+    func rightActionClosure(_ closure: @escaping (UIAlertAction) -> Void) -> AlertMaker {
+        rightActionClosure = closure
         return self
     }
     
-    func cancelClosure(_ closure: @escaping (UIAlertAction) -> Void) -> AlertMaker {
-        cancelClosure = closure
+    func leftActionClosure(_ closure: @escaping (UIAlertAction) -> Void) -> AlertMaker {
+        leftActionClosure = closure
         return self
     }
     

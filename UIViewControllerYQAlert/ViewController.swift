@@ -26,8 +26,8 @@ extension ViewController {
         yq.makeAlert { (make) in
             make.title = "提示"
             make.desc = "自定义按钮颜色"
-            make.cancelTitleColor = UIColor(colorHex: 0xF47920)
-            make.confirmTitleColor = UIColor(colorHex: 0xF47920)
+            make.leftActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.rightActionTitleColor = UIColor(colorHex: 0xF47920)
         }.show()
     }
     
@@ -36,10 +36,10 @@ extension ViewController {
         yq.makeAlert { (make) in
             make.title = "提示"
             make.desc = "自定义按钮文字内容"
-            make.cancelTitleColor = UIColor(colorHex: 0xF47920)
-            make.confirmTitleColor = UIColor(colorHex: 0xF47920)
-            make.cancelTitle = "好吧,暂不更换 😌"
-            make.confirmTitle = "我知道了,继续更换 🤣"
+            make.leftActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.rightActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.leftActionTitle = "好吧,暂不更换 😌"
+            make.rightActionTitle = "我知道了,继续更换 🤣"
         }.show()
     }
     
@@ -60,8 +60,8 @@ extension ViewController {
         yq.makeAlert { (make) in
             make.desc = "抱歉, 操作失败"
             make.titleImage = UIImage(named: "fail")
-            make.cancelTitleColor = UIColor(colorHex: 0xF47920)
-            make.confirmTitleColor = UIColor(colorHex: 0xF47920)
+            make.leftActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.rightActionTitleColor = UIColor(colorHex: 0xF47920)
         }.show()
     }
     
@@ -71,11 +71,11 @@ extension ViewController {
             make.title = "提示"
             make.desc = "耶!!! 操作成功!"
             make.titleImage = UIImage(named: "success")
-            make.cancelTitleColor = UIColor(colorHex: 0xF47920)
-            make.confirmTitleColor = UIColor(colorHex: 0xF47920)
-        }.confirmClosure({ (action) in
+            make.leftActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.rightActionTitleColor = UIColor(colorHex: 0xF47920)
+        }.rightActionClosure({ (action) in
             print("\(String(describing: action.title))")
-        }).cancelClosure({ (action) in
+        }).leftActionClosure({ (action) in
             print("\(String(describing: action.title))")
         }).show()
     }
@@ -85,10 +85,10 @@ extension ViewController {
         yq.makeAlert { (make) in
             make.title = "提示"
             make.desc = "只有一个操作按钮的弹出框"
-            make.confirmTitleColor = UIColor(colorHex: 0xF47920)
-        }.confirmClosure({ (action) in
+            make.rightActionTitleColor = UIColor(colorHex: 0xF47920)
+        }.rightActionClosure({ (action) in
             print("\(String(describing: action.title))")
-        }).showSingleConfirm()
+        }).showSingleRight()
     }
     
     /// 富文本描述文字
@@ -100,8 +100,7 @@ extension ViewController {
             descAttri.append(NSAttributedString(string: "\"attributedDesc\"", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.red]))
             descAttri.append(NSAttributedString(string: "设置描述文字", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.darkGray]))
             make.attributedDesc = descAttri
-            
-        }.showSingleConfirm()
+        }.showSingleRight()
     }
     
     /// 综合使用
@@ -110,13 +109,13 @@ extension ViewController {
             make.title = "提示"
             make.desc = "自定义按钮文字内容"
             make.titleImage = UIImage(named: "fail")
-            make.cancelTitleColor = UIColor(colorHex: 0xF47920)
-            make.confirmTitleColor = UIColor.gray
-            make.cancelTitle = "好吧,暂不更换 😌"
-            make.confirmTitle = "我知道了,继续更换 🤣"
-        }.confirmClosure({ (action) in
+            make.leftActionTitleColor = UIColor(colorHex: 0xF47920)
+            make.rightActionTitleColor = UIColor.gray
+            make.leftActionTitle = "好吧,暂不更换 😌"
+            make.rightActionTitle = "我知道了,继续更换 🤣"
+        }.rightActionClosure({ (action) in
             print("\(String(describing: action.title))")
-        }).cancelClosure({ (action) in
+        }).leftActionClosure({ (action) in
             print("\(String(describing: action.title))")
         }).show()
     }
