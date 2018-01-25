@@ -39,7 +39,8 @@ class AlertMaker {
         if let _ = attributedDesc {
             descAttr = attributedDesc!
         }
-        let alertVC = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let alertVC = SGAlertController(title: "", message: "", preferredStyle: .alert)
+        alertVC.view.tintColor = rightActionTitleColor
         if let titleImg = titleImage {
             if titleImageSize == CGSize.zero {
                 titleImageSize = titleImg.size
@@ -65,13 +66,13 @@ class AlertMaker {
         alertVC.setValue(titleAttr, forKey: "attributedTitle")
         alertVC.setValue(descAttr, forKey: "attributedMessage")
         
-        let confirmAction = UIAlertAction(title: rightActionTitle, style: .default) { (action) in
+        let confirmAction = SGAlertAction(title: rightActionTitle, style: .default) { (action) in
             if let closure = self.rightActionClosure {
                 closure(action)
             }
         }
         if !isSingleRight {
-            let cancelAction = UIAlertAction(title: leftActionTitle, style: .default) { (action) in
+            let cancelAction = SGAlertAction(title: leftActionTitle, style: .default) { (action) in
                 if let closure = self.leftActionClosure {
                     closure(action)
                 }
@@ -185,5 +186,15 @@ extension String {
         }
         
         return size
+    }
+}
+
+private class SGAlertAction: UIAlertAction {
+    open override func setValue(_ value: Any?, forUndefinedKey key: String) {
+    }
+}
+
+private class SGAlertController: UIAlertController {
+    open override func setValue(_ value: Any?, forUndefinedKey key: String) {
     }
 }
