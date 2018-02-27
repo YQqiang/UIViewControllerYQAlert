@@ -1,5 +1,7 @@
 # UIViewControllerYQAlert
 
+## 注意: iOS 8.3及以下系统, 无 `titleTextColor` 属性, 代码中使用了 `view.tintColor`, 只能设置按钮为同一种颜色; 分开设置按钮颜色无效
+
 ## 介绍
 在开发过程中, 难免会使用到弹出框; 系统的弹出框感觉不太能满足要求, 第三方的弹出框又不如系统的简洁.
 该项目是基于系统的弹出框`UIAlertController`扩展出来可以简单修改样式的`Alert`, 并且以链式调用使用弹出框.
