@@ -40,7 +40,12 @@ class AlertMaker {
             descAttr = attributedDesc!
         }
         let alertVC = SGAlertController(title: "", message: "", preferredStyle: .alert)
-        alertVC.view.tintColor = rightActionTitleColor
+        alertVC.linkRegex = linkRegex
+        alertVC.passColor = passColor
+        alertVC.linkColor = linkColor
+        alertVC.linkClickBegin = linkClickBegin
+        alertVC.linkClickEnd = linkClickEnd
+        alertVC.linkUnderLineStyle = linkUnderLineStyle
         if let titleImg = titleImage {
             if titleImageSize == CGSize.zero {
                 titleImageSize = titleImg.size
@@ -65,6 +70,7 @@ class AlertMaker {
         }
         alertVC.setValue(titleAttr, forKey: "attributedTitle")
         alertVC.setValue(descAttr, forKey: "attributedMessage")
+        alertVC.view.tintColor = rightActionTitleColor
         
         let confirmAction = SGAlertAction(title: rightActionTitle, style: .default) { (action) in
             if let closure = self.rightActionClosure {
@@ -101,6 +107,42 @@ class AlertMaker {
     
     fileprivate func titleImageHeight() -> CGFloat {
         return "\n".boundingRect(with: CGSize.init(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width), font: titleFont).height
+    }
+    
+    
+    // MARK: - 超链接
+    var linkRegex: String?
+    var linkClickBegin: ((SGLinkLabel, String) -> Void)?
+    var linkClickEnd: ((SGLinkLabel, String) -> Void)?
+    var linkColor: UIColor = UIColor(colorHex: 0x2D8EE5)
+    var passColor: UIColor = UIColor.gray
+    var linkUnderLineStyle: SGLinkUnderLineStyle = .none
+    var ocLinkUnderLineStyle: Int = 0 {
+        didSet {
+            switch ocLinkUnderLineStyle {
+            case 1:
+                linkUnderLineStyle = .single
+                break
+            case 2:
+                linkUnderLineStyle = .thick
+                break
+            case 2:
+                linkUnderLineStyle = .double
+                break
+            default:
+                linkUnderLineStyle = .none
+            }
+        }
+    }
+    
+    func linkClickBegin(_ closure: @escaping (SGLinkLabel, String) -> Void) -> AlertMaker {
+        linkClickBegin = closure
+        return self
+    }
+    
+    func linkClickEnd(_ closure: @escaping (SGLinkLabel, String) -> Void) -> AlertMaker {
+        linkClickEnd = closure
+        return self
     }
 }
 
@@ -194,7 +236,90 @@ private class SGAlertAction: UIAlertAction {
     }
 }
 
+enum SGLinkUnderLineStyle: Int {
+    case none = 0
+    case single = 1
+    case thick = 2
+    case double = 3
+}
+
 private class SGAlertController: UIAlertController {
+    
+    var linkRegex: String?
+    var linkClickBegin: ((SGLinkLabel, String) -> Void)?
+    var linkClickEnd: ((SGLinkLabel, String) -> Void)?
+    var linkColor: UIColor = UIColor.blue
+    var passColor: UIColor = UIColor.blue
+    var linkUnderLineStyle: SGLinkUnderLineStyle = .none
+    
+    private lazy var messageLabel: SGLinkLabel = {
+        let label = SGLinkLabel()
+        label.sgLinkLabelDelegate = self
+        self.view.addSubview(label)
+        return label
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if linkRegex != nil {
+            findSubV(view)
+        }
+    }
+    
+    fileprivate func findSubV(_ superV: UIView) {
+        superV.subviews.forEach { (subV) in
+            let messageAttr = value(forKey: "attributedMessage") as? NSAttributedString
+            if let lbl = subV as? UILabel, lbl.text == messageAttr?.string  {
+                lbl.isHidden = true
+                messageLabel.text = lbl.text
+                messageLabel.isHidden = !lbl.isHidden
+                messageLabel.font = lbl.font
+                messageLabel.textColor = lbl.textColor
+                
+                messageLabel.translatesAutoresizingMaskIntoConstraints = false
+                messageLabel.topAnchor.constraint(equalTo: lbl.topAnchor).isActive = true
+                messageLabel.bottomAnchor.constraint(equalTo: lbl.bottomAnchor).isActive = true
+                messageLabel.leftAnchor.constraint(equalTo: lbl.leftAnchor).isActive = true
+                messageLabel.rightAnchor.constraint(equalTo: lbl.rightAnchor).isActive = true
+                
+            } else {
+                findSubV(subV)
+            }
+        }
+    }
+    
     open override func setValue(_ value: Any?, forUndefinedKey key: String) {
     }
 }
+
+extension SGAlertController: SGLinkLabelDelegate {
+    
+    func contentsOfRegexString(with sgLinkLabel: SGLinkLabel!) -> String! {
+        return linkRegex!
+    }
+    
+    func passColor(with sgLinkLabel: SGLinkLabel!) -> UIColor! {
+        return passColor
+    }
+    
+    func linkColor(with sgLinkLabel: SGLinkLabel!) -> UIColor! {
+        return linkColor
+    }
+    
+    func linkUnderlineStyle(with sgLinkLabel: SGLinkLabel!) -> CTUnderlineStyle {
+        return CTUnderlineStyle.init(rawValue: Int32(linkUnderLineStyle.rawValue))
+    }
+    
+    func toucheBenginSGLinkLabel(_ sgLinkLabel: SGLinkLabel!, withContext context: String!) {
+        if let closure = linkClickBegin {
+            closure(sgLinkLabel, context)
+        }
+    }
+    
+    func toucheEnd(_ sgLinkLabel: SGLinkLabel!, withContext context: String!) {
+        if let closure = linkClickEnd {
+            closure(sgLinkLabel, context)
+        }
+    }
+}
+

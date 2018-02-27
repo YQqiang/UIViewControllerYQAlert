@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F605FB12044E714000BD2F9 /* SGLinkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F605FB02044E714000BD2F9 /* SGLinkLabel.m */; };
 		2F8BC5491FC2565000DD3366 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8BC5481FC2565000DD3366 /* AppDelegate.swift */; };
 		2F8BC54B1FC2565000DD3366 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8BC54A1FC2565000DD3366 /* ViewController.swift */; };
 		2F8BC54E1FC2565000DD3366 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F8BC54C1FC2565000DD3366 /* Main.storyboard */; };
@@ -36,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F605FAE2044E713000BD2F9 /* UIViewControllerYQAlert-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewControllerYQAlert-Bridging-Header.h"; sourceTree = "<group>"; };
+		2F605FAF2044E714000BD2F9 /* SGLinkLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGLinkLabel.h; sourceTree = "<group>"; };
+		2F605FB02044E714000BD2F9 /* SGLinkLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGLinkLabel.m; sourceTree = "<group>"; };
 		2F8BC5451FC2565000DD3366 /* UIViewControllerYQAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIViewControllerYQAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F8BC5481FC2565000DD3366 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F8BC54A1FC2565000DD3366 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,15 +84,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F8BC53C1FC2565000DD3366 = {
+		2F605FB22044E74E000BD2F9 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				2F8BC5771FC2581000DD3366 /* UIViewControllerYQAlert.swift */,
+				2F605FAF2044E714000BD2F9 /* SGLinkLabel.h */,
+				2F605FB02044E714000BD2F9 /* SGLinkLabel.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		2F8BC53C1FC2565000DD3366 = {
+			isa = PBXGroup;
+			children = (
+				2F605FB22044E74E000BD2F9 /* src */,
 				2F8BC57D1FC25DFA00DD3366 /* Localizable.strings */,
 				2F8BC5471FC2565000DD3366 /* UIViewControllerYQAlert */,
 				2F8BC55C1FC2565100DD3366 /* UIViewControllerYQAlertTests */,
 				2F8BC5671FC2565100DD3366 /* UIViewControllerYQAlertUITests */,
 				2F8BC5461FC2565000DD3366 /* Products */,
+				2F605FAE2044E713000BD2F9 /* UIViewControllerYQAlert-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +216,7 @@
 				TargetAttributes = {
 					2F8BC5441FC2565000DD3366 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					2F8BC5581FC2565100DD3366 = {
@@ -269,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F605FB12044E714000BD2F9 /* SGLinkLabel.m in Sources */,
 				2F8BC54B1FC2565000DD3366 /* ViewController.swift in Sources */,
 				2F8BC5491FC2565000DD3366 /* AppDelegate.swift in Sources */,
 				2F8BC5781FC2581000DD3366 /* UIViewControllerYQAlert.swift in Sources */,
@@ -449,12 +466,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FTYJBY2LP3;
 				INFOPLIST_FILE = UIViewControllerYQAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuqiangcoder.UIViewControllerYQAlert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UIViewControllerYQAlert-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -464,12 +484,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FTYJBY2LP3;
 				INFOPLIST_FILE = UIViewControllerYQAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuqiangcoder.UIViewControllerYQAlert;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UIViewControllerYQAlert-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

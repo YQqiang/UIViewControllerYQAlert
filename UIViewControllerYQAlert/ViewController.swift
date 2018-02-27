@@ -103,6 +103,23 @@ extension ViewController {
         }.showSingleRight()
     }
     
+    @IBAction func showLinkAlert(_ sender: UIButton) {
+        yq.makeAlert { (make) in
+            make.title = "温馨提示"
+            make.desc = "您已连续超过五次输入密码错误, 账号已被锁定, 请点击找回密码进行密码找回."
+            make.linkUnderLineStyle = .single
+            make.linkColor = UIColor.red
+            make.passColor = UIColor.gray
+            make.linkRegex = "(?:找回密码)"
+            }.linkClickEnd { (label, text) in
+                print("-------- \(text)")
+                let viewController = UIViewController()
+                viewController.title = text
+                viewController.view.backgroundColor = UIColor.white
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+                self.navigationController?.pushViewController(viewController, animated: true)
+        }.showSingleRight()
+    }
     /// 综合使用
     @IBAction func showAlertComprehensive(_ sender: UIButton) {
         yq.makeAlert { (make) in
