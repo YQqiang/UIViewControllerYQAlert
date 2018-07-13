@@ -35,7 +35,10 @@
 - (UIColor *)linkColorWithSGLinkLabel:(SGLinkLabel *)sgLinkLabel;
 //设置当前文本手指经过的颜色
 - (UIColor *)passColorWithSGLinkLabel:(SGLinkLabel *)sgLinkLabel;
+// 超链接下划线样式
 - (CTUnderlineStyle)linkUnderlineStyleWithSGLinkLabel:(SGLinkLabel *)sgLinkLabel;
+//文本对齐方式
+- (CTTextAlignment)alignmentStyleWithSGLinkLabel:(SGLinkLabel *)sgLinkLabel;
 
 /*
  注意：
@@ -62,4 +65,3 @@
                   text:(NSString *)text
              linespace:(CGFloat)linespace;
 @end
-

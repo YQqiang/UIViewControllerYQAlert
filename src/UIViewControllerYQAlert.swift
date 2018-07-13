@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class AlertMaker {
     
@@ -35,9 +36,11 @@ class AlertMaker {
     
     func show(isSingleRight: Bool = false) {
         var titleAttr = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
-        var descAttr = NSAttributedString(string: (desc.count > 0 ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
+        var descAttr = NSAttributedString(string: ((title.count > 0) ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
         if let _ = attributedDesc {
-            descAttr = attributedDesc!
+            let tempAttr = NSMutableAttributedString(string: ((title.count > 0 ) ? "\n" : ""), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 1)])
+            tempAttr.append(attributedDesc!)
+            descAttr = tempAttr
         }
         let alertVC = SGAlertController(title: "", message: "", preferredStyle: .alert)
         alertVC.linkRegex = linkRegex
@@ -51,7 +54,7 @@ class AlertMaker {
                 titleImageSize = titleImg.size
             }
             var count = Int(titleImageSize.height / titleImageHeight()) + 1
-            if title.count > 0 {
+            if (title.count > 0 || desc.count > 0) {
                 count += 1
             }
             var enterStr = ""
@@ -59,6 +62,8 @@ class AlertMaker {
                 enterStr += "\n"
             }
             titleAttr = NSAttributedString(string: enterStr + title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
+            alertVC.setValue(titleAttr, forKey: "attributedTitle")
+            alertVC.setValue(descAttr, forKey: "attributedMessage")
             let titleImageView = UIImageView(image: titleImg)
             alertVC.view.addSubview(titleImageView)
             titleImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,9 +72,10 @@ class AlertMaker {
             let widthConstraint = NSLayoutConstraint(item: titleImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: titleImageSize.width)
             let heightConstraint = NSLayoutConstraint(item: titleImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: titleImageSize.height)
             alertVC.view.addConstraints([topConstraint, centerXConstraint, widthConstraint, heightConstraint])
+        } else {
+            alertVC.setValue(titleAttr, forKey: "attributedTitle")
+            alertVC.setValue(descAttr, forKey: "attributedMessage")
         }
-        alertVC.setValue(titleAttr, forKey: "attributedTitle")
-        alertVC.setValue(descAttr, forKey: "attributedMessage")
         alertVC.view.tintColor = rightActionTitleColor
         
         let confirmAction = SGAlertAction(title: rightActionTitle, style: .default) { (action) in
@@ -126,7 +132,7 @@ class AlertMaker {
             case 2:
                 linkUnderLineStyle = .thick
                 break
-            case 2:
+            case 3:
                 linkUnderLineStyle = .double
                 break
             default:
@@ -252,9 +258,10 @@ private class SGAlertController: UIAlertController {
     var passColor: UIColor = UIColor.blue
     var linkUnderLineStyle: SGLinkUnderLineStyle = .none
     
-    private lazy var messageLabel: SGLinkLabel = {
+    fileprivate lazy var messageLabel: SGLinkLabel = {
         let label = SGLinkLabel()
         label.sgLinkLabelDelegate = self
+        label.numberOfLines = 0
         self.view.addSubview(label)
         return label
     }()
@@ -263,6 +270,33 @@ private class SGAlertController: UIAlertController {
         super.viewDidLoad()
         if linkRegex != nil {
             findSubV(view)
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        if linkRegex == nil {
+            setDescLabelNumofRow(view)
+        }
+        super.viewWillLayoutSubviews()
+    }
+    
+    fileprivate func setDescLabelNumofRow(_ superV: UIView) {
+        superV.subviews.forEach { (subV) in
+            let messageAttr = value(forKey: "attributedMessage") as? NSAttributedString
+            if let lbl = subV as? UILabel, lbl.text == messageAttr?.string  {
+                lbl.sizeToFit()
+                let textWidth = messageAttr?.string.boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height), font: lbl.font).width ?? 0
+                let lblWidth = lbl.frame.width
+                if textWidth > lblWidth {
+                    lbl.textAlignment = .left
+                } else {
+                    lbl.textAlignment = .center
+                }
+                view.layoutIfNeeded()
+                return
+            } else {
+                setDescLabelNumofRow(subV)
+            }
         }
     }
     
@@ -281,7 +315,6 @@ private class SGAlertController: UIAlertController {
                 messageLabel.bottomAnchor.constraint(equalTo: lbl.bottomAnchor).isActive = true
                 messageLabel.leftAnchor.constraint(equalTo: lbl.leftAnchor).isActive = true
                 messageLabel.rightAnchor.constraint(equalTo: lbl.rightAnchor).isActive = true
-                
             } else {
                 findSubV(subV)
             }
@@ -295,7 +328,7 @@ private class SGAlertController: UIAlertController {
 extension SGAlertController: SGLinkLabelDelegate {
     
     func contentsOfRegexString(with sgLinkLabel: SGLinkLabel!) -> String! {
-        return linkRegex!
+        return linkRegex ?? ""
     }
     
     func passColor(with sgLinkLabel: SGLinkLabel!) -> UIColor! {
@@ -308,6 +341,15 @@ extension SGAlertController: SGLinkLabelDelegate {
     
     func linkUnderlineStyle(with sgLinkLabel: SGLinkLabel!) -> CTUnderlineStyle {
         return CTUnderlineStyle.init(rawValue: Int32(linkUnderLineStyle.rawValue))
+    }
+    
+    func alignmentStyle(with sgLinkLabel: SGLinkLabel!) -> CTTextAlignment {
+        let textWidth = messageLabel.text?.boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height), font: messageLabel.font).width ?? 0
+        let lblWidth = messageLabel.frame.width
+        if textWidth > lblWidth {
+            return CTTextAlignment.left
+        }
+        return CTTextAlignment.center
     }
     
     func toucheBenginSGLinkLabel(_ sgLinkLabel: SGLinkLabel!, withContext context: String!) {

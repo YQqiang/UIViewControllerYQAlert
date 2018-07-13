@@ -137,7 +137,12 @@
     
     //------------------------设置段落属性-----------------------------
     //指定为对齐属性
-    CTTextAlignment alignment = kCTTextAlignmentCenter;
+    CTTextAlignment alignment = kCTTextAlignmentLeft;
+    if ([self.sgLinkLabelDelegate conformsToProtocol:@protocol(SGLinkLabelDelegate)]) {
+        if ([self.sgLinkLabelDelegate respondsToSelector:@selector(alignmentStyleWithSGLinkLabel:)]) {
+            alignment = [self.sgLinkLabelDelegate alignmentStyleWithSGLinkLabel:self];
+        }
+    }
     CTParagraphStyleSetting alignmentStyle;
     alignmentStyle.spec=kCTParagraphStyleSpecifierAlignment;//指定为对齐属性
     alignmentStyle.valueSize=sizeof(alignment);
@@ -591,7 +596,6 @@ CGFloat RunDelegateGetWidthCallback(void *refCon){
 
 
 @end
-
 
 
 
