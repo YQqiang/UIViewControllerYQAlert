@@ -285,7 +285,7 @@ private class SGAlertController: UIAlertController {
             let messageAttr = value(forKey: "attributedMessage") as? NSAttributedString
             if let lbl = subV as? UILabel, lbl.text == messageAttr?.string  {
                 lbl.sizeToFit()
-                let textWidth = messageAttr?.string.boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height), font: lbl.font).width ?? 0
+                let textWidth = messageAttr?.boundingRect(with: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height), options: [.truncatesLastVisibleLine, .usesLineFragmentOrigin, .usesFontLeading], context: nil).size.width ?? 0
                 let lblWidth = lbl.frame.width
                 if textWidth > lblWidth {
                     lbl.textAlignment = .left
