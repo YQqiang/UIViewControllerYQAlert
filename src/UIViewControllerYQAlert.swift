@@ -36,9 +36,9 @@ class AlertMaker {
     
     func show(isSingleRight: Bool = false) {
         var titleAttr = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
-        var descAttr = NSAttributedString(string: ((title.count > 0) ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
+        var descAttr = NSAttributedString(string: ((title.count > 0 && desc.count > 0) ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
         if let _ = attributedDesc {
-            let tempAttr = NSMutableAttributedString(string: ((title.count > 0 ) ? "\n" : ""), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 1)])
+            let tempAttr = NSMutableAttributedString(string: ((title.count > 0  && attributedDesc!.string.count > 0) ? "\n" : ""), attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 1)])
             tempAttr.append(attributedDesc!)
             descAttr = tempAttr
         }
