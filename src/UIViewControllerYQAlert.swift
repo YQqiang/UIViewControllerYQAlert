@@ -34,7 +34,8 @@ class AlertMaker {
     
     fileprivate var viewController: UIViewController?
     
-    func show(isSingleRight: Bool = false) {
+    @discardableResult
+    func show(isSingleRight: Bool = false) -> UIAlertController {
         var titleAttr = NSAttributedString(string: title, attributes: [NSAttributedStringKey.font: titleFont, NSAttributedStringKey.foregroundColor: titleColor])
         var descAttr = NSAttributedString(string: ((title.count > 0 && desc.count > 0) ? "\n" : "") + desc, attributes: [NSAttributedStringKey.font: descFont, NSAttributedStringKey.foregroundColor: descColor])
         if let _ = attributedDesc {
@@ -95,6 +96,7 @@ class AlertMaker {
         confirmAction.setValue(rightActionTitleColor, forKey: "titleTextColor")
         alertVC.addAction(confirmAction)
         self.viewController?.present(alertVC, animated: true, completion: nil)
+        return alertVC
     }
     
     func showSingleRight() {
@@ -149,6 +151,34 @@ class AlertMaker {
     func linkClickEnd(_ closure: @escaping (SGLinkLabel, String) -> Void) -> AlertMaker {
         linkClickEnd = closure
         return self
+    }
+}
+
+extension AlertMaker {
+    /// 倒计时弹框 （ X 秒后， 确定按钮可用）
+    ///
+    /// - Parameter second: 待倒计时的数值
+    func showCountdown(_ second: Int) {
+        var count = second
+        let alertVC = show()
+        let action = alertVC.actions.last
+        let actionTitle = rightActionTitle + "(" + "\(count)" + ")"
+        action?.setValue(actionTitle, forKey: "title")
+        alertVC.actions.last?.isEnabled = false
+        let _ = Timer.yq_scheduledTimerWithTimeInterval(TimeInterval(1), repeats: true) {[weak self] (timer) in
+            guard let strongSelf = self else {
+                timer.invalidate()
+                return
+            }
+            count -= 1
+            var title = strongSelf.rightActionTitle + "(" + "\(count)" + ")"
+            if count <= 0 {
+                title = strongSelf.rightActionTitle
+                action?.isEnabled = true
+                timer.invalidate()
+            }
+            action?.setValue(title, forKey: "title")
+        }
     }
 }
 
@@ -234,6 +264,18 @@ extension String {
         }
         
         return size
+    }
+}
+
+extension Timer {
+    @objc open class func yq_scheduledTimerWithTimeInterval(_ inerval: TimeInterval, repeats: Bool, block:@escaping ((Timer) -> Void)) -> Timer {
+        return Timer.scheduledTimer(timeInterval: inerval, target: self, selector: #selector(yq_blockInvoke(_:)), userInfo: block, repeats: repeats)
+    }
+    
+    @objc private class func yq_blockInvoke(_ timer: Timer) {
+        if let block = timer.userInfo as? ((Timer) -> Void) {
+            block(timer)
+        }
     }
 }
 

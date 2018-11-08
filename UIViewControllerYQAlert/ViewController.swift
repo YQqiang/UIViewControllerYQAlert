@@ -120,6 +120,15 @@ extension ViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
         }.showSingleRight()
     }
+    
+    @IBAction func showAlertPrivacy(_ sender: UIButton) {
+        yq.makeAlert { (make) in
+            make.title = "隐私协议"
+            make.desc = "隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议"
+            make.rightActionTitle = "我已阅读并同意"
+        }.showCountdown(5)
+    }
+    
     /// 综合使用
     @IBAction func showAlertComprehensive(_ sender: UIButton) {
         yq.makeAlert { (make) in

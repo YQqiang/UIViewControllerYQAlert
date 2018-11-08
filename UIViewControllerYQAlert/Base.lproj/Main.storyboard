@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Hn-7H-dPw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Hn-7H-dPw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,70 +21,77 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovk-ka-DXD">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                         <state key="normal" title="基本用法"/>
                                         <connections>
                                             <action selector="showAlert:forEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TMa-mZ-eyd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxe-Mk-Kb9">
-                                        <rect key="frame" x="0.0" y="60.5" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="55" width="375" height="54.5"/>
                                         <state key="normal" title="自定义按钮文字颜色"/>
                                         <connections>
                                             <action selector="showAlertChangeColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rCR-dl-o0z"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dX-VG-JrF">
-                                        <rect key="frame" x="0.0" y="120.5" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="109.5" width="375" height="55"/>
                                         <state key="normal" title="自定义按钮文字"/>
                                         <connections>
                                             <action selector="showAlertChangeButtonTitle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rve-0I-2ZL"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbG-Ms-kPO">
-                                        <rect key="frame" x="0.0" y="181" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="164.5" width="375" height="55"/>
                                         <state key="normal" title="自定义标题和描述样式"/>
                                         <connections>
                                             <action selector="showAlertChangeTitleAndDesc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3wO-ap-dkt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-d0-qEh">
-                                        <rect key="frame" x="0.0" y="241" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="219.5" width="375" height="54.5"/>
                                         <state key="normal" title="自定义标题图片"/>
                                         <connections>
                                             <action selector="showAlertTitleImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="25S-WL-l4D"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yFd-MQ-UYx">
-                                        <rect key="frame" x="0.0" y="301.5" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="274" width="375" height="55"/>
                                         <state key="normal" title="按钮事件监听"/>
                                         <connections>
                                             <action selector="showAlertAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lgj-UR-B16"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zxI-fG-7iy">
-                                        <rect key="frame" x="0.0" y="362" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="329" width="375" height="54.5"/>
                                         <state key="normal" title="一个按钮的弹出框"/>
                                         <connections>
                                             <action selector="showAlertOneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kl9-iD-uCZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t4N-PN-dbB">
-                                        <rect key="frame" x="0.0" y="422" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="383.5" width="375" height="55"/>
                                         <state key="normal" title="富文本描述文字"/>
                                         <connections>
                                             <action selector="showAttributeDescAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ace-PS-aQD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nE7-kT-2Jx">
-                                        <rect key="frame" x="0.0" y="482.5" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="438.5" width="375" height="55"/>
                                         <state key="normal" title="超链接文本"/>
                                         <connections>
                                             <action selector="showLinkAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hfL-cG-BG2"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cV-gF-PyL">
+                                        <rect key="frame" x="0.0" y="493.5" width="375" height="54.5"/>
+                                        <state key="normal" title="隐私政策弹框"/>
+                                        <connections>
+                                            <action selector="showAlertPrivacy:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fjc-uB-aOx"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTv-eg-5mT">
-                                        <rect key="frame" x="0.0" y="542.5" width="375" height="60.5"/>
+                                        <rect key="frame" x="0.0" y="548" width="375" height="55"/>
                                         <state key="normal" title="综合使用"/>
                                         <connections>
                                             <action selector="showAlertComprehensive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mhQ-d5-Red"/>
