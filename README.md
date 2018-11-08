@@ -148,7 +148,19 @@ yq.makeAlert { (make) in
 }.showSingleRight()
 ```
 
-#### 9. 综合使用
+#### 9. 确定按钮倒计时结束时才可点击
+
+<img src="https://github.com/YQqiang/UIViewControllerYQAlert/blob/master/Screen%20Shot/10.gif" alt="倒计时" width="320">
+
+```swift
+yq.makeAlert { (make) in
+  make.title = "隐私协议"
+  make.desc = "隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议"
+  make.rightActionTitle = "我已阅读并同意"
+}.showCountdown(5)
+```
+
+#### 10. 综合使用
 
 <img src="https://github.com/YQqiang/UIViewControllerYQAlert/blob/master/Screen%20Shot/8.png" alt="综合使用" width="320">
 
